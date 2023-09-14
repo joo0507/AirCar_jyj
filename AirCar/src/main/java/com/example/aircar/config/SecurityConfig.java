@@ -4,7 +4,6 @@ package com.example.aircar.config;
 import com.example.aircar.handler.CustomFormLoginSuccessHandler;
 
 
-import com.example.aircar.handler.CustomSocialLoginSuccessHandler;
 import com.example.aircar.service.MemberService;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -21,6 +20,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 @AllArgsConstructor
+@NoArgsConstructor
 public class SecurityConfig {
 
     private MemberService memberService;
@@ -29,12 +29,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         // 페이지 권한 설정, 로그인 페이지 설정, 로그아웃 메소드 등에 대한 설정을 작성
         http.formLogin()
-                .loginPage("/login")
+                .loginPage("/member/login")
                 /*.defaultSuccessUrl("/main")*/
                 .successHandler(authenticationFormLoginSuccessHandler())
                 .usernameParameter("id")
                 .passwordParameter("pw")
-                .failureUrl("/login/error")
+                .failureUrl("/member/login")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
@@ -43,10 +43,10 @@ public class SecurityConfig {
         ;
 
         http.oauth2Login()
-                .loginPage("/login")
-//                .defaultSuccessUrl("/main")
-                .successHandler(authenticationSuccessHandler())
-                .failureUrl("/login/error")
+                .loginPage("/member/login")
+                .defaultSuccessUrl("/main")
+                /*.successHandler(authenticationSuccessHandler())*/
+                .failureUrl("/member/login")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout"))
@@ -55,19 +55,20 @@ public class SecurityConfig {
         ;
 
 // csrf 전송 끄기
-       //http.csrf().disable();
 
+//        http.csrf().disable();
     /*    permitAll() - 모든 사용자가 인증(로그인)없이 해당 경로에 접근할 수 있도록 설정
         anyRequest().authenticated() - mvcMatchers에서 설정해준 경로를 제외한
                                       나머지 경로들은 모두 인증을 요구하도록 설정
          */
 
-       /* http.authorizeRequests()
-            .mvcMatchers("/assets/**").permitAll()
-            .mvcMatchers("/main", "/login", "/").permitAll()
-            //.mvcMatchers("/board/**").
-            .mvcMatchers("/admin/**").hasRole("ADMIN")
-
+     /*   http.authorizeRequests()
+            .mvcMatchers("/css/**", "/js/**",
+                    "/img/**", "/vendor/**").permitAll()
+            .mvcMatchers("/", "/members/**", "/replies/**",
+                    "/uploadAjax", "/uploadEx", "/display", "/removeFile").permitAll()
+            //.mvcMatchers("/board/**").hasRole("ADMIN")
+            .mvcMatchers("/board/**").hasAnyRole("ADMIN", "USER")
             .anyRequest().authenticated()
         ;*/
 
@@ -85,10 +86,10 @@ public class SecurityConfig {
         return new CustomFormLoginSuccessHandler();
     }
 
-    @Bean
-    public AuthenticationSuccessHandler authenticationSuccessHandler(){
-        return new CustomSocialLoginSuccessHandler(passwordEncoder(), memberService);
-    }
+    /*@Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomSocialLoginSuccessHandler(passwordEncoder());
+    }*/
 
 
 }
