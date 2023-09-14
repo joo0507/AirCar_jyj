@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout2}">
+
+
+<!-- header -->
+
+<!-- Page Content Start -->
+<!-- ================== -->
+<th:block layout:fragment="admin_content">
+
+
+    <div id="root" style="height: 100%">
+        <div class="pc_wrap" style="">
+            <div class="wrap sub_wrap">
+                <div class="container">
+                    <div class="inner">
+                        <div class="contents" style="margin: auto;">
+                            <div class="title_wrap"><h2 class="title_30 search_form__row">자주 찾는 질문 수정</h2></div>
+                            <form action="/admin/noticesUpdate" method="post">
+                                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                                <input type="hidden" name="bno" th:value="${notices.bno}"/>
+
+                                <div class="board_detail" style="margin-bottom: 50px">
+                                    <div class=" mb-3">
+                                        <span class="input-group-text" id="basic-addon1">제목</span>
+                                        <input type="text" name="notices_title" class="form-control" placeholder="제목" aria-label="title" aria-describedby="basic-addon1"
+                                               th:value="${notices.notices_title}">
+                                    </div>
+                                    <div class=" mb-3">
+                                        <span class="input-group-text" id="basic-addon3">카테고리</span>
+                                        <input type="text" name="notices_category" class="form-control" placeholder="카테고리" aria-label="category" aria-describedby="basic-addon3"
+                                               th:value="${notices.notices_category}">
+                                    </div>
+                                    <div class="board_contents mt20"><p>
+                                        <div align="" style="">
+                                            <div class=" mb-3">
+                                                <span class="input-group-text" id="basic-addon2">내용</span>
+                                                <textarea class="form-control" name="notices_content"
+                                                          placeholder="내용" aria-label="content" aria-describedby="basic-addon2"
+                                                          style="height: 500px">[[${notices.notices_content}]]</textarea>
+                                            </div>
+                                            <p>&nbsp;</p></div>
+                                        <p>&nbsp;</p></div>
+                                </div>
+                                <div class="input-group mb-3 pagination justify-content-center" >
+                                    <button type="submit" class="btn btn-secondary" style="margin-right: 30px; width: 100px">수정</button>
+                                    <button type="reset" class="btn btn-light" style="margin-right: 30px; width: 100px">취소</button>
+                                    <button type="button" class="btn btn-light" style="width: 100px"
+                                            th:onclick="|location.href='@{/admin/notices}'|">목록</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div style="position: fixed; z-index: 9999; inset: 16px 16px 100px; pointer-events: none;"></div>
+                </div>
+            </div>

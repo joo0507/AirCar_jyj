@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="side_menu">
+    <ul class="member_a">
+        <li><a>
+            <div class="prof"><span class="txt">서해명님 안녕하세요</span></div>
+        </a></li>
+        <li><a class="logout">로그아웃</a></li>
+    </ul>
+</div>
+<!-- 로그아웃 클릭시 아래 팝업 -->
+<div class="layerPopup alertPopup">
+    <div class="layerPopup_wrap">
+        <div class="layerPopup_content">
+            <div class="pop_info"><p class="txt"><span>로그아웃 하시겠어요?<br></span></p></div>
+        </div>
+        <div class="layerPopup_bottom">
+            <div class="btn_group btn_prompt">
+                <button class="btn type04">취소</button>
+                <button class="btn type01">로그아웃</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+
+<div class="valid_box"><p class="txt">비밀번호를 다시 입력해주세요</p></div>
+
+
+<script>
+    var modifyButtons = [
+        { modify: $('#modifier1'), button: $('#chkBtn1') },
+        { modify: $('#modifier2'), button: $('#chkBtn2') },
+        { modify: $('#modifier3'), button: $('#chkBtn3') }
+    ];
+
+    modifyButtons.forEach(function (item) {
+        item.modify.on("keyup", function () {
+            if (item.modify.val().length > 0) {
+                item.button.removeAttr("disabled");
+            } else {
+                item.button.attr("disabled", "disabled");
+            }
+        });
+    });
+
+    modifyButtons.forEach(function (item){
+        item.button.click(function (){
+            var data = {access:buttonId,
+                value: item.modify.val()};
+            console.log(data);
+
+            $.ajax({
+                type: 'POST',
+                url: '/updateMember',
+                data:  JSON.stringify(data),
+                contentType: 'application/json;',
+                dataType: 'json',
+                beforeSend : function(xhr)
+                {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                    xhr.setRequestHeader(header, token);
+                },
+                success: function(response) {
+
+
+                    if (response === "success") {
+                        alert("정보 업데이트 완료")
+
+                        location.href = "/myInfo";
+                    } else {
+                        // 비밀번호가 일치하지 않는 경우
+                        console.error('정보 업데이트 에러 발생');
+                    }
+                },
+                error: function() {
+                    // 에러 시 처리
+                    console.error('POST 전송 오류 발생');
+                }
+            })
+        });
+    });
+</script>
+
+<script>
+
+</script>

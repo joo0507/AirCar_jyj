@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<th:block layout:fragment="content">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/reset.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/animate.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/bootstrap-reset.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/helper.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/style-responsive.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/style.css}">
+   <!-- <link rel="stylesheet" th:href="@{/assets/css/HJS/common.css}">-->
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/calendar.css}">
+    <!--<link rel="stylesheet" th:href="@{/assets/css/HJS/component.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/assets/css/HJS/main.css}">-->
+<!--    <link rel="stylesheet" th:href="@{/assets/css/HJS/content.css}">-->
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/reserve.css}">
+    <link rel="stylesheet" th:href="@{/js/air-datepicker/dist/css/datepicker.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/register.css}">
+    <script>
+        window.onload = function () {
+            var status1 = [[${car.reserveStatus}]];
+            if (status1 == 1 ){
+
+                alert("예약이 완료된 차량입니다.");
+                window.location.href = '/reserve';
+
+
+            }
+        }
+    </script>
+<!--    <th:block th:each="car : ${carInfo}">-->
+    <div class="container"  >
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="hidden" name="carNum" th:value="${car.carNum}"/>
+        <input type="hidden" name= "reserveStatus" th:value="${car.reserveStatus}">
+        <div class="inner">
+            <div class="contents">
+                <div class="title_wrap"><h2 class="title_30 mb0">차량상세</h2></div>
+                <div class="top_product">
+                  <div class="img_area"><img th:src="@{'img_upload/'+${car.carImg}}"></div>
+                    <div class="product_box"><p class="car_logo">
+<!--                        <img src="https://homepage.skcarrental.com/pc_assets/img/contents/logo_kia.svg" alt="기아자동차"></p>-->
+                        <img th:src="@{'img_upload/'+${car.brandImg}}" th:alt="${car.brand}"></p>
+                        <div class="brand_info">
+                            <h2>기아자동차 <strong>
+                                <th:block th:text="${car.name}"></th:block>
+                            </strong></h2>
+                            <p class="sub_title">[제휴사차량] 모닝 1.0 가솔린</p></div>
+                    </div>
+                    <div class="detail_info affi_wrap">
+                        <div class="detail_info__tit"><p class="title_20"><span>에어카가 보장하는</span> 제휴사차량</p></div>
+                        <hr class="mini">
+                        <ul class="dot_list">
+                            <li>이 차량은 에어카가 제휴사(한국렌트카, 금강렌트카, 제주자연렌트카)로부터<br> 위탁받아 운영하는 차량이에요.</li>
+                            <li>최상의 차량 상태를 위해 에어카가 직접 관리해요.</li>
+                            <li>모든 서비스는 에어카와 동일하게 이용 가능해요.</li>
+                        </ul>
+                    </div>
+                    <ul class="spec_list">
+                        <li><p class="ico"><img src="/img/oil.png" alt=""></p>
+                            <p class="sbj">연료</p>
+                            <p class="obj">
+                                <th:block th:text="${car.fuel}"></th:block>
+                            </p>
+                        </li>
+                        <li><p class="ico"><img src="/img/ico_persons.png" alt=""></p>
+                            <p class="sbj">승차인원</p>
+                            <p class="obj">
+                                <th:block th:text="${car.people}"></th:block>
+                                <em> 명</em></p>
+                        </li>
+                        <li><p class="ico"><img src="/img/ico_car_year.png" alt=""></p>
+                            <p class="sbj">연식</p>
+                            <p class="obj">
+                                <th:block th:text="${car.people}"></th:block>
+                            </p>
+                        </li>
+                        <li><p class="ico"><img src="/img/ico_persons.png" alt=""></p>
+                            <p class="sbj">운전자나이</p>
+                            <p class="obj"><em>만 </em>
+                                <th:block th:text="${car.driverAge}"></th:block>
+                                <em> 세 이상</em></p>
+                        </li>
+                        <li><p class="ico"><img src="/img/ico_driverEx1.png" alt=""></p>
+                            <p class="sbj">운전경력</p>
+                            <p class="obj">
+                                <th:block th:text="${car.driverCareer}"></th:block>
+                                <em> 년 이상</em></p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="detail_info" style="margin-top: 32px;">
+                    <div class="detail_info__tit"><p class="title_20">차량옵션</p></div>
+                    <div class="option_box">
+                        <ul>
+                            <li>
+                                <div class="option_list"><img src="/img/ico_camera_24x24.png" alt="">
+                                    <div class="option_txt">
+                                        <p>
+                                            <th:block th:text="${car.options}"></th:block>
+                                        </p>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail_info" style="margin-top: 32px;">
+                    <div class="detail_info__tit"><p class="title_20">적재공간</p><span class="s_txt">정보제공: 겟차</span></div>
+                    <div class="option_box">
+                        <ul>
+                            <li class="space_list">
+                                <div class="option_list"><img src="/img/ico_goldbag_32x32.png" alt="골프백 이미지">
+                                    <div class="option_txt"><p>골프백</p><span>가로 42cm · 세로 129cm 기준</span></div>
+                                </div>
+                                <div class="right_txt"><p>0 개</p></div>
+                            </li>
+                            <li class="space_list">
+                                <div class="option_list"><img src="/img/ico_stroller_32x32.png"
+                                                              alt="골프백 이미지">
+                                    <div class="option_txt"><p>유모차</p></div>
+                                </div>
+                                <div class="right_txt"><p>휴대용까지 가능</p></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail_info" style="margin-top: 32px;">
+                    <div class="detail_info__tit"><p class="title_20">인수 및 반납장소</p><span
+                            class="s_txt">정보제공: 네이버지도</span>
+                    </div>
+                    <div class="navy_box">
+                        <div class="navy_wrap">
+                            <div class="container" style="padding: 40px 0 0px 0;">
+                                <section class="section" id="section-3" style="width: 56%;">
+                                    <div id="map" style="width: 100%;height: 355px;margin: auto;position: relative;overflow: hidden;background: rgb(248, 249, 250);"></div>
+                                    <code id="snippet" class="snippet"></code>
+                                </section>
+                            </div>
+
+                        </div>
+                        <div class="navy_txt"><h4 class="point_name">부산지점</h4>
+                            <ul class="spot_text_sb">
+                                <li>
+                                    <dl>
+                                        <dt>주소</dt>
+                                        <dd>부산광역시 부산진구 중앙대로 708
+                                            <div class="right_btn"><a>네이버 지도로 보기</a></div>
+                                        </dd>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <dl>
+                                        <dt>전화</dt>
+                                        <dd>010-2948-7741</dd>
+                                    </dl>
+                                </li>
+                                <li>
+                                    <dl>
+                                        <dt>이용 가능한 시간</dt>
+                                        <dd>인수 07:30 ~ 22:00</dd>
+                                        <dd>반납 06:00 ~ 21:00</dd>
+                                    </dl>
+                                </li>
+                            </ul>
+                            <hr class="small">
+                            <div class="rule_info"><p class="title">인수 및 반납 규정</p>
+                                <ul class="dot_list">
+                                    <li>인수 및 반납은 지점별 이용 가능한 시간 내 가능해요</li>
+                                    <li>예약자(제1운전자) 뿐 아니라 사전에 등록된 제2운전자와 제3운전자도 인수 및 반납이 가능해요</li>
+                                    <li>차량 인수 시, 운전면허 지참은 필수예요(도로교통법상 유효한 운전면허 소지자)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail_info noti_wrap" style="margin-top: 32px;">
+                    <div class="detail_info__tit"><p class="title_16 mb0">차량 하자</p></div>
+                    <div class="info_txt">
+                        <ul class="dot_list">
+                            <li>
+                                <div class="notice_box">
+                                    <th:block th:text="${car.defect}"></th:block>
+                                </div>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="detail_info" style="margin-top: 32px;">
+                    <div class="detail_info__tit mask"><p class="title_16">COVID-19 방역 안내</p></div>
+                    <p class="info_txt">SK렌터카는 COVID-19 감염 예방을 위해 전 차량 항균 소독하고 있습니다.</p></div>
+                <div class="btn_group single"><a class="btn" style="line-height: 42px">목록으로 돌아가기</a></div>
+            </div>
+            <div class="sidebar">
+                <div id="sideScroll" class="inner scroll_p">
+                    <div class="rental_area">
+                        <ul class="rental_sel" style="
+    padding-bottom: 18px;
+    padding-top: 18px;
+">
+                            <li class="place">부산지점</li>
+                            <li class="date"><th:block th:text="${car.startDate}"></th:block> ~ <th:block th:text="${car.endDate}"></th:block></li>
+                            <li class="brand"><th:block th:text="${car.brand}"></th:block> / <th:block th:text="${car.name}"></th:block> / <th:block th:text="${car.fuel}"></th:block> </li>
+                        </ul>
+                        <div class="rental_price">
+                            <div class="sale"><span class="sale_price">회원 할인가</span><span
+                                    class="price"><th:block th:text="${#numbers.formatInteger(car.cost, 3, 'COMMA')}"></th:block> 원</span><span
+                                    class="sale_rate">81%</span></div>
+                            <div class="default"><span class="default_price">표준가</span><span
+                                    class="price">403,500원</span>
+                            </div>
+                        </div>
+                        <div class="btn_group type01">
+                            <button class="btn type01"   th:onclick="'window.location.href=\'' + @{/reserve_first(carNum=${car.carNum})} + '\''"
+                                    style="line-height:11px "><th:block th:text="${car.cost}"></th:block> 원으로 예약하기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="float_wrap">
+                <div class="inner">
+                    <div class="chat_cont">
+                        <div class="chat_btn"><a> 상담하기</a></div>
+                        <ul class="chat_list">
+                            <li class="chat"><a>채팅상담</a></li>
+                            <li class="inquiry"><a>1:1문의 작성</a></li>
+                        </ul>
+                    </div>
+                    <div class="top_cont"><a class="top_btn"><span class="blind">TOP</span></a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+<!--    </th:block>-->
+</th:block>
+</html>

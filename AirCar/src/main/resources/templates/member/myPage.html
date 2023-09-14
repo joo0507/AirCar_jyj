@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <th:block th:replace="fragments/CSS_Fragment::link"></th:block>
+</head>
+
+<th:block layout:fragment="content">
+
+    <div class="container">
+        <div class="inner">
+            <div class="contents">
+                <div class="title_wrap"><h2 class="title_30">마이페이지</h2></div>
+                <div class="sub_cont">
+                    <div class="profile_cont">
+                        <div class="txt"><p class="name"><strong>[[${session.memberInfo.getNickname()}]]님 </strong>안녕하세요!</p>
+                            <p class="desc">언제나, 어디서나 AIRCAR와 함께해 주세요</p></div>
+                        <button class="link_btn myInfoPop">내 정보 관리</button>
+                    </div>
+                </div>
+                <div class="sub_cont">
+                    <div class="title_wrap"><p class="title_18">나의 예약 공유렌트</p><a class="moreview" href="/reserve_confirm">전체보기</a></div>
+                    <div class="car_info_box" style="cursor: pointer;">
+                        <div class="car_info__txt"><p class="reservation_num" style="display: flex;">예약번호<span
+                                aria-live="polite" aria-busy="true"><span class="react-loading-skeleton"
+                                                                          style="margin-left: 5px; width: 5rem;">&zwnj;</span><br></span>
+                        </p>
+                            <p class="title_18"><span aria-live="polite" aria-busy="true"><span
+                                    class="react-loading-skeleton">&zwnj;</span><br></span></p>
+                            <p class="date"><span aria-live="polite" aria-busy="true"><span
+                                    class="react-loading-skeleton">&zwnj;</span><br></span>
+                            </p>
+                            <p class="company"><span aria-live="polite" aria-busy="true"><span
+                                    class="react-loading-skeleton">&zwnj;</span><br></span></p></div>
+                        <span class="photo"></span></div>
+                    <ul class="flex_box_row row2">
+                        <li><a target="_blank" class="white_box border">
+                            <div class="down_list_info link_type">
+                                <dl>
+                                    <dt>나의 쿠폰/상품권</dt>
+                                    <dd>가지고 계신 쿠폰을 확인해 보세요</dd>
+                                </dl>
+                            </div>
+                        </a></li>
+                        <li><a target="_blank" class="white_box border">
+                            <div class="down_list_info link_type">
+                                <dl>
+                                    <dt>1:1 문의 내역</dt>
+                                    <dd>정확한 답변으로 안내해 드릴게요</dd>
+                                </dl>
+                            </div>
+                        </a></li>
+                    </ul>
+                </div>
+                <div class="sub_cont">
+                    <div class="title_wrap"><p class="title_18">나의 공유카 등록</p></div>
+                    <a target="_blank" class="white_box" href="register_car">
+                        <figure class="row_cards"><img src="../img/main_b05.jpg" alt="">
+                            <figcaption><p class="title_16">차량 등록</p>
+                                <p class="title_14">차량정보부터 운전면허까지 편리하게 공유할 차량을 등록해보세요</p></figcaption>
+                        </figure>
+                    </a></div>
+            </div>
+            <div class="layerPopup small myInfo" style="display: none">
+                <div class="layerPopup_wrap">
+                    <div class="layerPopup_heading"><h2 class="heading">비밀번호를 입력해 주세요</h2>
+                        <button class="btn_close">닫기</button>
+                    </div>
+                    <div class="layerPopup_content">
+                        <div class="form_control">
+                            <div class="form_row">
+                                <label for="pwInput" class="form_label">비밀번호</label><p id="pwChkErrMsg" style="color:red"></p>
+                                <input id="pwInput" name="names" type="password" placeholder="영문, 숫자, 특수문자 포함 10~20자 이내" maxlength="20">
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="layerPopup_bottom bottom_gray">
+                        <div class="btn_group">
+                            <button id="chkPW" class="btn type01 pwBtn" disabled>비밀번호를 입력해 주세요</button>
+                            <!-- input에 비밀번호가 한글자라도 입력되면 아래로 변경
+                            <button class="btn type01" >입력완료</button>
+                            -->
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <th:block th:replace="fragments/sidebarCustomerCenter::sidebarCC"></th:block>
+            <th:block th:replace="fragments/floatCounselling::conselling"></th:block>
+        </div>
+    </div>
+</th:block>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout2}">
+
+
+<!-- header -->
+
+<!-- Page Content Start -->
+<!-- ================== -->
+<th:block layout:fragment="admin_content">
+
+
+    <!-- Page Content Start -->
+    <!-- ================== -->
+
+    <div class="wraper container-fluid">
+        <div class="page-title">
+            <h3 class="title">자주 찾는 질문 등록</h3>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <form class="form-horizontal" action="/admin/noticesRegister" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">* 질문명</label>
+                                <div class="col-md-10">
+                                    <input type="text" class="form-control" name="notices_title">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-10">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">* 카테고리</label>
+                                <select name="notices_category"
+                                        style="border: 1px solid #ccc; width: 80%; height: 34px; margin-left: 15px">
+                                    <option name="change" value="예약·변경">예약·변경</option>
+                                    <option name="driver" value="운전자">운전자</option>
+                                    <option name="discount" value="제휴·할인">제휴·할인</option>
+                                    <option name="insurance" value="보험">보험</option>
+                                    <option name="breakdown" value="고장·사고">고장·사고</option>
+                                    <option name="rental" value="장기렌터카">장기렌터카</option>
+                                    <option name="breakdown" value="유류비">유류비</option>
+                                    <option name="rental" value="부가용품">부가용품</option>
+                                    <option name="rental" value="기타">기타</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-2 control-label">* 공지내용</label>
+                                <div class="col-md-10">
+                                    <textarea class="form-control" name="notices_content"  style="height: 500px"></textarea>
+                                </div>
+                            </div>
+
+
+                            <div class="border_top p-t-30  text-center">
+                                <button type="reset" class="btn btn-default w-md m-b-5">취소</button>
+                                <button type="submit" class="btn btn-info w-md m-b-5">등록</button>
+                                <!--수정버튼
+                                <button type="button" class="btn btn-warning w-md m-b-5">수정</button>
+                                -->
+                            </div>
+
+
+                        </form>
+
+                    </div><!-- end panel-body -->
+                </div><!-- end panel -->
+            </div>
+        </div> <!-- end row -->
+
+
+
+
+    </div>
+    <!-- Page Content Ends -->
+    <!-- ================== -->
+
+
+

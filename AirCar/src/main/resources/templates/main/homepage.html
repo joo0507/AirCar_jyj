@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+<head>
+    <th:block th:replace="fragments/CSS_Fragment::link"></th:block>
+</head>
+<th:block layout:fragment="content">
+
+    <style type="text/css">
+        .slider {
+            width: 720px;
+            margin: 100px auto;
+
+
+        }
+        .slick-slider {
+            position: relative;
+
+            display: block;
+            box-sizing: border-box;
+
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+
+            -webkit-touch-callout: none;
+            -khtml-user-select: none;
+            -ms-touch-action: pan-y;
+            touch-action: pan-y;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /*.slick-initialized .slick-slide {
+            display: block;
+        }*/
+        /*.center {
+            display: flex; !* 플렉스 박스로 설정 *!
+            justify-content: center; !* 가로 중앙 정렬 *!
+            align-items: center; !* 세로 중앙 정렬 *!
+        }*/
+
+
+        .slick-slide img {
+            max-width: 100%;
+            border-radius: 10px;
+
+        }
+
+        .slick-prev:before,
+        .slick-next:before {
+            color: black;
+        }
+
+
+        .slick-slide {
+            margin: 0px 3px;
+            transition: all ease-in-out .3s;
+            opacity: .5;
+        }
+
+        .benefit_wrap .slick-active{
+            opacity: 1;
+        }
+
+        .slick-active {
+            opacity: .8;
+        }
+
+        .slick-current {
+            opacity: 1;
+        }
+        /*.prev{display:inline-block; width:30px; height:30px; background:black; }
+        .next{display:inline-block; width:30px; height:30px; background:red;}*/
+
+
+
+        .center button{
+            top: 50% !important;
+            position: absolute;
+            display: inline-block;
+            z-index: 100;
+            transform: translateY(-50%);
+        }
+    </style>
+<!--</head>
+<body style="overflow: visible;">-->
+
+
+            <div class="container">
+                <div class="visual_wrap">
+                    <div class="video_wrap">
+                        <div class="txt_wrap"></div>
+                        <img src="../../../img/main_visual03.png"></div>
+                </div>
+
+                <div class="inner">
+                    <div class="contents">
+
+                        <div class="benefit_wrap">
+                            <ul class="center slider">
+                                    <li>
+                                        <img src="../../../img/Frame3.png" >
+                                    </li>
+                                    <li>
+                                        <img src="../../../img/Frame4.png" >
+                                    </li>
+                                    <li>
+                                        <img src="../../../img/Frame2.png" >
+                                    </li>
+                                    <li>
+                                        <img src="../../../img/Group2.png" >
+                                    </li>
+<!--                                    <li>-->
+<!--                                        <img src="http://placehold.it/350x300?text=5" >-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <img src="http://placehold.it/350x300?text=6" >-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <img src="http://placehold.it/350x300?text=7" >-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <img src="http://placehold.it/350x300?text=8" >-->
+<!--                                    </li>-->
+<!--                                    <li>-->
+<!--                                        <img src="http://placehold.it/350x300?text=9" >-->
+<!--                                    </li>-->
+                            </ul>
+                            <!--<ul class="carousel">
+                                <div class="slick-slider slick-initialized" dir="ltr">
+                                    <div class="slick-list">
+                                        <div class="slick-track"
+                                             style="opacity: 1; transform: translate3d(-1080px, 0px, 0px); width: 2880px;">
+                                            <div data-index="-2" tabindex="-1" class="slick-slide slick-cloned"
+                                                 aria-hidden="true" style="width: 360px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;">
+                                                        <a><img src="https://homepage.skcarrental.com/skr/common/comm-img-srvr/2023/06/28/pc_main_bnr.jpg"
+                                                                alt=""><span class="label">전기차혜택</span>
+                                                            <div class="cont_wrap"><em
+                                                                    class=""><span>커피머신SET, 빔 프로젝터<br></span><span>전기차 예약하면 빌려드려요!<br></span></em>
+                                                                <p class="">제주 여행템 OPEN!</p></div>
+                                                        </a></li>
+                                                </div>
+                                            </div>
+                                            <div data-index="-1" tabindex="-1" class="slick-slide slick-cloned"
+                                                 aria-hidden="true" style="width: 360px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;">
+                                                        <a><img src="https://homepage.skcarrental.com/skr/common/comm-img-srvr/2023/07/20/pc_main-bnr.jpg"
+                                                                alt=""><span class="label">전기차혜택</span>
+                                                            <div class="cont_wrap"><em class=""><span>전기차 충전료 전액 무료<br></span><span>SK렌터카가 다~ 쏠게요<br></span></em>
+                                                                <p class="">충전료 걱정없는 제주여행</p></div>
+                                                        </a></li>
+                                                </div>
+                                            </div>
+                                            <div data-index="0" class="slick-slide" tabindex="-1" aria-hidden="true"
+                                                 style="outline: none; width: 360px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;">
+                                                        <a><img src="https://homepage.skcarrental.com/skr/common/comm-img-srvr/2023/06/15/pc_main-bnr.jpg"
+                                                                alt=""><span class="label">회원전용</span>
+                                                            <div class="cont_wrap"><em
+                                                                    class=""><span>전기차로 즐기는 럭셔리 차박<br></span><span>필요한 캠핑용품 모두 제공!<br></span></em>
+                                                                <p class="">캠핑장소까지 준비했어요~</p></div>
+                                                        </a></li>
+                                                </div>
+                                            </div>
+                                            <div data-index="1" class="slick-slide slick-active slick-current"
+                                                 tabindex="-1" aria-hidden="false" style="outline: none; width: 360px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;">
+                                                        <a><img src="https://homepage.skcarrental.com/skr/common/comm-img-srvr/2023/06/28/pc_main_bnr.jpg"
+                                                                alt=""><span class="label">전기차혜택</span>
+                                                            <div class="cont_wrap"><em
+                                                                    class=""><span>커피머신SET, 빔 프로젝터<br></span><span>전기차 예약하면 빌려드려요!<br></span></em>
+                                                                <p class="">제주 여행템 OPEN!</p></div>
+                                                        </a></li>
+                                                </div>
+                                            </div>
+                                            <div data-index="2" class="slick-slide slick-active" tabindex="-1"
+                                                 aria-hidden="false" style="outline: none; width: 360px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;">
+                                                        <a><img src="https://homepage.skcarrental.com/skr/common/comm-img-srvr/2023/07/20/pc_main-bnr.jpg"
+                                                                alt=""><span class="label">전기차혜택</span>
+                                                            <div class="cont_wrap"><em class=""><span>전기차 충전료 전액 무료<br></span><span>SK렌터카가 다~ 쏠게요<br></span></em>
+                                                                <p class="">충전료 걱정없는 제주여행</p></div>
+                                                        </a></li>
+                                                </div>
+                                            </div>
+                                            <div data-index="3" tabindex="-1" class="slick-slide slick-cloned"
+                                                 aria-hidden="true" style="width: 360px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;">
+                                                        <a><img src="https://homepage.skcarrental.com/skr/common/comm-img-srvr/2023/06/15/pc_main-bnr.jpg"
+                                                                alt=""><span class="label">회원전용</span>
+                                                            <div class="cont_wrap"><em
+                                                                    class=""><span>전기차로 즐기는 럭셔리 차박<br></span><span>필요한 캠핑용품 모두 제공!<br></span></em>
+                                                                <p class="">캠핑장소까지 준비했어요~</p></div>
+                                                        </a></li>
+                                                </div>
+                                            </div>
+                                            <div data-index="4" tabindex="-1" class="slick-slide slick-cloned"
+                                                 aria-hidden="true" style="width: 360px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;">
+                                                        <a><img src="https://homepage.skcarrental.com/skr/common/comm-img-srvr/2023/06/28/pc_main_bnr.jpg"
+                                                                alt=""><span class="label">전기차혜택</span>
+                                                            <div class="cont_wrap"><em
+                                                                    class=""><span>커피머신SET, 빔 프로젝터<br></span><span>전기차 예약하면 빌려드려요!<br></span></em>
+                                                                <p class="">제주 여행템 OPEN!</p></div>
+                                                        </a></li>
+                                                </div>
+                                            </div>
+                                            <div data-index="5" tabindex="-1" class="slick-slide slick-cloned"
+                                                 aria-hidden="true" style="width: 360px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;">
+                                                        <a><img src="https://homepage.skcarrental.com/skr/common/comm-img-srvr/2023/07/20/pc_main-bnr.jpg"
+                                                                alt=""><span class="label">전기차혜택</span>
+                                                            <div class="cont_wrap"><em class=""><span>전기차 충전료 전액 무료<br></span><span>SK렌터카가 다~ 쏠게요<br></span></em>
+                                                                <p class="">충전료 걱정없는 제주여행</p></div>
+                                                        </a></li>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ul>
+                            <button class="prev"><img src="pc_assets/img/common/arrow_fill.svg" alt="이전버튼"></button>
+                            <button class="next"><img src="pc_assets/img/common/arrow_fill.svg" alt="다음버튼"></button>-->
+                        </div>
+                        <div class="jejucont_wrap"><p class="main_tit"><em>취향따라 즐기는 제주</em></p><span class="main_desc">이번 여행, 이런 차는 어떠세요?</span>
+                            <ul class="carousel">
+                                <li>
+                                    <img src="../../../img/GroupM.png" >
+                                </li>
+                                <li>
+                                    <img src="../../../img/Group9.png" >
+                                </li>
+                                <li>
+                                    <img src="../../../img/Group20.png" >
+                                </li>
+                                <li>
+                                    <img src="../../../img/Group30.png" >
+                                </li>
+                                <li>
+                                    <img src="../../../img/Group60.png" >
+                                </li>
+                                <li>
+                                    <img src="../../../img/Group50.png" >
+                                </li>
+                                <li>
+                                    <img src="../../../img/Group70.png" >
+                                </li>
+                                <li>
+                                    <img src="../../../img/Group80.png" >
+                                </li>
+<!--                                <li>-->
+<!--                                    <img src="../../../img/GroupM.png" >-->
+<!--                                </li>-->
+                                <!--<div class="slick-slider slick-initialized" dir="ltr">
+                                    <div class="slick-list">
+                                        <div class="slick-track"
+                                             style="opacity: 1; transform: translate3d(0px, 0px, 0px); width: 860px;">
+                                            <div data-index="0" class="slick-slide slick-active slick-current"
+                                                 tabindex="-1" aria-hidden="false" style="outline: none; width: 215px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;"><a>
+                                                        <div class="img_wrap"><img
+                                                                src="/pc_assets/img/etc/@recommend01_2.jpg" alt="">
+                                                        </div>
+                                                        <div class="cont_wrap"><p class="label">럭셔리 차박 전용 전기차</p>
+                                                            <p class="txt">
+                                                                <span>장소부터 캠핑용품까지 <br></span><span> 모두 준비했어요<br></span>
+                                                            </p></div>
+                                                    </a></li>
+                                                </div>
+                                            </div>
+                                            <div data-index="1" class="slick-slide slick-active" tabindex="-1"
+                                                 aria-hidden="false" style="outline: none; width: 215px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;"><a>
+                                                        <div class="img_wrap"><img
+                                                                src="/pc_assets/img/etc/@recommend01_1.jpg" alt="">
+                                                        </div>
+                                                        <div class="cont_wrap"><p class="label">NEW 전기차</p>
+                                                            <p class="txt"><span>타보고 싶은 전기차, <br></span><span> 새로 들어왔어요!<br></span>
+                                                            </p></div>
+                                                    </a></li>
+                                                </div>
+                                            </div>
+                                            <div data-index="2" class="slick-slide slick-active" tabindex="-1"
+                                                 aria-hidden="false" style="outline: none; width: 215px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;"><a>
+                                                        <div class="img_wrap"><img
+                                                                src="/pc_assets/img/etc/@recommend01_3.jpg" alt="">
+                                                        </div>
+                                                        <div class="cont_wrap"><p class="label">프리미엄 전기차</p>
+                                                            <p class="txt"><span>이번 여행은 특별하니까 <br></span><span> 프리미엄으로 한번 타볼까?<br></span>
+                                                            </p></div>
+                                                    </a></li>
+                                                </div>
+                                            </div>
+                                            <div data-index="3" class="slick-slide slick-active" tabindex="-1"
+                                                 aria-hidden="false" style="outline: none; width: 215px;">
+                                                <div>
+                                                    <li tabindex="-1" style="width: 100%; display: inline-block;"><a>
+                                                        <div class="img_wrap"><img
+                                                                src="/pc_assets/img/etc/@recommend01_4.jpg" alt="">
+                                                        </div>
+                                                        <div class="cont_wrap"><p class="label">인생샷각</p>
+                                                            <p class="txt">
+                                                                <span>제주에서 인생샷 찍고 <br></span><span>프사 바꿔볼까요?<br></span>
+                                                            </p></div>
+                                                    </a></li>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                            </ul>
+
+                        </div>
+<!--                        <div class="eventcont_wrap"><p class="main_tit"><em>Move Better Your Life</em></p><span-->
+<!--                                class="main_desc">SK렌터카와 시작해볼까요?</span>-->
+<!--                            <ul class="carousel2">-->
+<!--                                <li>-->
+<!--                                    <img src="http://placehold.it/350x300?text=1" >-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <img src="http://placehold.it/350x300?text=2" >-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <img src="http://placehold.it/350x300?text=3" >-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <img src="http://placehold.it/350x300?text=4" >-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <img src="http://placehold.it/350x300?text=5" >-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <img src="http://placehold.it/350x300?text=6" >-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <img src="http://placehold.it/350x300?text=7" >-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <img src="http://placehold.it/350x300?text=8" >-->
+<!--                                </li>-->
+<!--                                <li>-->
+<!--                                    <img src="http://placehold.it/350x300?text=9" >-->
+<!--                                </li>-->
+<!--                                &lt;!&ndash;<div class="slick-slider slick-initialized" dir="ltr">-->
+<!--                                    <div class="slick-list">-->
+<!--                                        <div class="slick-track"-->
+<!--                                             style="opacity: 1; transform: translate3d(0px, 0px, 0px); width: 1190px;">-->
+<!--                                            <div data-index="0" class="slick-slide slick-active slick-current"-->
+<!--                                                 tabindex="-1" aria-hidden="false" style="outline: none; width: 170px;">-->
+<!--                                                <div>-->
+<!--                                                    <li tabindex="-1" style="width: 100%; display: inline-block;"><a>-->
+<!--                                                        <div class="img_wrap"><img-->
+<!--                                                                src="https://homepage.skcarrental.com/skr/common/comm-img-srvr/2023/05/17/27ab0787-d283-4f00-bb4c-341eeb52c947.png"-->
+<!--                                                                alt=""></div>-->
+<!--                                                        <div class="cont_wrap"><p class="txt">제주 No.1 SK렌터카</p></div>-->
+<!--                                                    </a></li>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div data-index="1" class="slick-slide slick-active" tabindex="-1"-->
+<!--                                                 aria-hidden="false" style="outline: none; width: 170px;">-->
+<!--                                                <div>-->
+<!--                                                    <li tabindex="-1" style="width: 100%; display: inline-block;"><a>-->
+<!--                                                        <div class="img_wrap"><img src="/assets/img/etc/@stroy01.jpg"-->
+<!--                                                                                   alt=""></div>-->
+<!--                                                        <div class="cont_wrap"><p class="txt">SK렌터카 200% 활용법</p></div>-->
+<!--                                                    </a></li>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div data-index="2" class="slick-slide slick-active" tabindex="-1"-->
+<!--                                                 aria-hidden="false" style="outline: none; width: 170px;">-->
+<!--                                                <div>-->
+<!--                                                    <li tabindex="-1" style="width: 100%; display: inline-block;"><a>-->
+<!--                                                        <div class="img_wrap"><img src="/assets/img/etc/@stroy02.jpg"-->
+<!--                                                                                   alt=""></div>-->
+<!--                                                        <div class="cont_wrap"><p class="txt">전기차 충전 방법 안내</p></div>-->
+<!--                                                    </a></li>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div data-index="3" class="slick-slide slick-active" tabindex="-1"-->
+<!--                                                 aria-hidden="false" style="outline: none; width: 170px;">-->
+<!--                                                <div>-->
+<!--                                                    <li tabindex="-1" style="width: 100%; display: inline-block;"><a>-->
+<!--                                                        <div class="img_wrap"><img src="/assets/img/etc/@stroy03.jpg"-->
+<!--                                                                                   alt=""></div>-->
+<!--                                                        <div class="cont_wrap"><p class="txt">전기차로 즐기는 제주여행</p></div>-->
+<!--                                                    </a></li>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div data-index="4" class="slick-slide slick-active" tabindex="-1"-->
+<!--                                                 aria-hidden="false" style="outline: none; width: 170px;">-->
+<!--                                                <div>-->
+<!--                                                    <li tabindex="-1" style="width: 100%; display: inline-block;"><a>-->
+<!--                                                        <div class="img_wrap"><img src="/assets/img/etc/@stroy04.jpg"-->
+<!--                                                                                   alt=""></div>-->
+<!--                                                        <div class="cont_wrap"><p class="txt">제주지점 셔틀버스 안내</p></div>-->
+<!--                                                    </a></li>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div data-index="5" class="slick-slide" tabindex="-1" aria-hidden="true"-->
+<!--                                                 style="outline: none; width: 170px;">-->
+<!--                                                <div>-->
+<!--                                                    <li tabindex="-1" style="width: 100%; display: inline-block;"><a>-->
+<!--                                                        <div class="img_wrap"><img src="/assets/img/etc/@stroy05.jpg"-->
+<!--                                                                                   alt=""></div>-->
+<!--                                                        <div class="cont_wrap"><p class="txt">수전동 휠체어 대여 서비스</p></div>-->
+<!--                                                    </a></li>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div data-index="6" class="slick-slide" tabindex="-1" aria-hidden="true"-->
+<!--                                                 style="outline: none; width: 170px;">-->
+<!--                                                <div>-->
+<!--                                                    <li tabindex="-1" style="width: 100%; display: inline-block;"><a>-->
+<!--                                                        <div class="img_wrap"><img src="/assets/img/etc/@stroy06.jpg"-->
+<!--                                                                                   alt=""></div>-->
+<!--                                                        <div class="cont_wrap"><p class="txt">충전&amp;휴식을 함께,에코라운지</p>-->
+<!--                                                        </div>-->
+<!--                                                    </a></li>-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>&ndash;&gt;-->
+<!--                            </ul>-->
+
+<!--                        </div>-->
+
+                        <div class="affiliate_wrap">
+                            <ul>
+                                <li><a><img src="/img/main_b01.jpg">
+                                    <p class="txt">신차 장기렌터카<span class="desc">믿을 수 있는 실시간 진짜 견적 서비스</span></p></a></li>
+                                <li><a><img src="/img/main_b02.jpg">
+                                    <p class="txt">중고차 장기 렌터카<span class="desc">품질은 신차 급, 가격은 실속있게</span></p></a></li>
+                                <li><a><img src="/img/main_b03.jpg">
+                                    <p class="txt">타고페이<span class="desc">국내 유일, 탄 만큼만 내는 렌탈료</span></p></a></li>
+                                <li class="detail_consulting"><img src="../../../img/main_b04.jpg">
+                                    <p class="txt">장기렌트 전문가 상담<span class="desc"><a>개인(사업자) 장기렌트</a><a>법인 장기렌트</a><a>법인 월장기(중고차)</a></span>
+                                    </p></li>
+                                <li><a><img src="../../../img/billycar_logo.png" alt="빌리카" class="img"></a>
+                                </li>
+                                <li><a><img src="../../../img/smartlink_logo.png" alt="스마트링크"
+                                            class="img"></a></li>
+                                <li><a><img src="../../../img/smartcare_logo.png" alt="스마트케어"
+                                            class="img"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <th:block th:replace="fragments/sidebarBook2::sidebarBook"></th:block>
+                    <th:block th:replace="fragments/floatCounselling::conselling"></th:block>
+                </div>
+            </div>
+            <div>
+                <div style="position: fixed; z-index: 9999; inset: 16px 16px 100px; pointer-events: none;"></div>
+            </div>
+
+
+
+
+</th:block>
+</html>
+
+

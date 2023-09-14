@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout1}">
+
+<th:block layout:fragment="content">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/reset.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/animate.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/bootstrap-reset.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/helper.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/style-responsive.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/style.css}">
+<!--    <link rel="stylesheet" th:href="@{/assets/css/HJS/common.css}">-->
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/calendar.css}">
+   <!-- <link rel="stylesheet" th:href="@{/assets/css/HJS/component.css}">-->
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/main.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/content.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/HJS/reserve.css}">
+    <link rel="stylesheet" th:href="@{/js/air-datepicker/dist/css/datepicker.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/css/register.css}">
+    <form method="post" action="/reserveInfo" id="frm">
+    <div class="container">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+        <input type="hidden" name="carNum" th:value="${car.carNum}"/>
+        <div class="inner">
+            <div class="contents">
+                <div class="title_wrap"><h2 class="title_30"> 예약 </h2>
+                    <ul class="step_wrap">
+                        <li class="on">예약</li>
+                        <li class="">결제</li>
+                        <li class="">완료</li>
+                    </ul>
+                </div>
+                <div class="sub_cont"><p class="title_18">어떤 보험을 선택할까요</p><span class="title_14">합리적인 가격, 마음의 평화! 안전도 즐거움도 지키세요</span>
+                    <div class="inner"><p class="title_16 major">보험 선택하기</p>
+                        <p class="title_14 txt_lightgray">상대방과 나를 보호하는 종합보험이 포함되어 있어요</p>
+                        <ul class="insur_tab horz">
+                            <li id="firstQ"><a id="firstI" >
+                                <div class="tit_wrap"><h4 class="tit">선택안함</h4>
+                                    <p class="ex_txt">323,000원 추가</p></div>
+                                <div class="txt_wrap"><p class="txt">사고 시 고객부담금</p>
+                                    <p class="btn" style="background-color: orange">전액</p></div>
+                            </a></li>
+                            <li id="secondQ"><a id="secondI" >
+                                <div class="tit_wrap"><h4 class="tit">일반자차</h4>
+                                    <p class="ex_txt">323,000원 추가</p></div>
+                                <div class="txt_wrap"><p class="txt">사고 시 고객부담금</p>
+                                    <p class="btn" style="background-color: orange">30만원</p></div>
+                            </a></li>
+                            <li id="thirdQ"><a id="thirdI">
+                                <div class="tit_wrap"><h4 class="tit">완전자차</h4>
+                                    <p class="ex_txt">323,000원 추가</p></div>
+                                <div class="txt_wrap"><p class="txt">사고 시 고객부담금</p>
+                                    <p class="btn" style="background-color: orange">면제</p></div>
+                            </a></li>
+                        </ul>
+                        <div class="cont_btm">
+                            <div class="insur_link"><a>보장내용을 알아볼까요?</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sub_cont"><p class="title_18">운전자(예약자) 정보를 입력해 주세요</p><span class="title_14">입력한 정보는 안전하게 보호할게요</span>
+                    <div class="inner"><p class="title_16 major">기본정보</p>
+                        <div class="info_box mb40">
+                            <div class="form_row "><label for="name" class="form_label">이름</label><input id="nickname"
+                                                                                                         type="text"
+                                                                                                         placeholder="이름을 입력해주세요"
+                                                                                                         value=""
+                                                                                                         disabled="">
+                            </div>
+                            <div class="form_row "><label for="phone" class="form_label">휴대폰</label><input id="phone"
+                                                                                                           type="tel"
+                                                                                                           placeholder="휴대폰을 입력해 주세요"
+                                                                                                           value="01029487741"
+                                                                                                           disabled="">
+                            </div>
+                            <div class="form_row "><label for="birth" class="form_label">생년월일</label><input id="birth"
+                                                                                                            type="tel"
+                                                                                                            placeholder="예) 19901231"
+                                                                                                            value="19961223"
+                                                                                                            disabled="">
+                            </div>
+
+                        </div>
+                        <p class="title_16 major">운전면허 정보</p>
+                        <div class="license_img"><img src="/img/img_license.png" alt="운전면허증예시"></div>
+                        <div class="info_box">
+                            <div class="form_row select_box "><label class="form_label">면허종류</label><select>
+                                <option value="">면허종류를 선택해주세요</option>
+                                <option value="106005">2종보통</option>
+                                <option value="106003">1종보통</option>
+                                <option value="106002">1종대형</option>
+                                <option value="106001">1종특수-대형견인차(트레일러)</option>
+                                <option value="106010">1종특수-구난차(레커)</option>
+                                <option value="106011">1종특수-소형견인차</option>
+                                <option value="106009">국제면허</option>
+                            </select></div>
+                            <div class="form_row error"><label for="number" class="form_label">면허번호</label><input
+                                    maxlength="12" id="number" type="text" placeholder="면허번호를 입력해주세요" value="">
+<!--                                <div class="valid_box"><p class="txt">면허번호를 입력해주세요</p></div>-->
+                                <div class="ex_box"><p class="txt">구면허증) 서울-01-123456-00 → 서울0112345600</p>
+                                    <p class="txt">신면허증) 11-01-123456-00 → 110112345600</p></div>
+                            </div>
+                            <div class="form_row error"><label for="isDate" class="form_label">발급일자</label><input
+                                    maxlength="8" id="isDate" type="tel" placeholder="예) 20210101" value="">
+<!--                                <div class="valid_box"><p class="txt">발급일자를 입력해주세요</p></div>-->
+                            </div>
+                            <div class="form_row error"><label for="exDate" class="form_label">만료일자</label><input
+                                    maxlength="8" id="exDate" type="tel" placeholder="예) 20251231" value="">
+<!--                                <div class="valid_box"><p class="txt">만료일자를 입력해주세요</p></div>-->
+                            </div>
+                        </div>
+                        <div class="cont_btm">
+                            <div class="insur_link"><a>자세한 자격 조건이 궁금하세요?</a></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="res_ex_txt">
+                    <ul class="dot_list">
+                        <li>입력한 운전자 정보와 예약자 정보가 다를 경우 대여가 제한될 수 있어요.</li>
+                        <li>나이, 면허종류, 운전경력에 따라 이용 가능한 차종 및 차량이 다를 수 있어요.</li>
+                        <li>‘운전자 추가 등록’은 예약완료 후 ‘예약내역’ 페이지에서 추가할 수 있어요.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sidebar" style="top: -10px;">
+                <div id="sideScroll" class="inner" style="max-height: 632px;">
+                    <div>
+                        <div class="title_wrap"><p class="title_18">여정 정보</p></div>
+
+                        <div class="side_box journey_wrap">
+                            <div><p class="tit"> [[${session.nickname}]]님의 여정</p>
+                                <dl>
+                                    <dt><i><img src="/assets/img/contents/ico_journey01.png" alt=""></i>부산지점</dt>
+                                </dl>
+                            </div>
+                            <div>
+                                <dl>
+                                    <dt><i><img src="/assets/img/contents/ico_journey02.png" alt=""></i><th:block th:text="${car.startDate}"></th:block>
+                                         ~ <th:block th:text="${car.endDate}"></th:block>
+                                    </dt>
+                                    <dd>
+                                    </dd>
+                                </dl>
+                            </div>
+                            <div>
+                                <dl>
+                                    <dt><i><img src="/assets/img/contents/ico_journey03.png" alt=""></i><th:block th:text="${car.brand}"></th:block> / <th:block th:text="${car.name}"></th:block> / <th:block th:text="${car.fuel}"></th:block> </dt>
+                                    <dd>
+                                        <th:block th:text="${car.year}"></th:block>년식
+                                        <th:block th:text="${car.fuel}"></th:block>
+                                    </dd>
+                                </dl>
+                            </div>
+                        </div>
+                        <div class="side_box pay_wrap"><p class="tit">결제내역</p>
+                            <ul class="pay_list">
+                                <li><span>표준가</span><span>3,126,800원</span></li>
+                            </ul>
+                            <ul class="pay_list">
+                                <li><span>보험료</span><span>323,000원</span></li>
+                            </ul>
+                            <ul class="pay_list">
+                                <li><span>할인금액</span><span class="txt_orange">- 2,280,422원</span></li>
+                                <li>
+                                    <ul class="pay_li_detail">
+                                        <li><span>시즌할인</span><span class="txt_orange">- 1,342,382원</span></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <ul class="pay_li_detail">
+                                        <li><span>회원할인</span><span class="txt_orange">- 938,040원</span></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="pay_list total">
+                                <li><span>총 결제금액</span><span id="cost"><th:block th:text="${car.cost}" ></th:block> 원</span></li>
+                                <li class="desc">항목별 합계금액 원 단위 절상 또는 절사</li>
+                            </ul>
+                        </div>
+                        <div class="btn_group">
+                            <div class="balloon_bt_box" style="color: black;  border-radius: 14px;">
+                                <button type="button"  id="pay_btn" onclick="requestPay()" class="btn type01" style="color: white;line-height: 0px;">입력완료</button>
+                                <p class="balloon_box" style="width: 200px;">보험선택 및 운전자 정보를 입력해주세요</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+    </body>
+    <!--결제 api-->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js" type="text/javascript"></script>
+    <script>
+
+        var sessionNickname = /*[[${session.nickname}]]*/ '';
+        var token = $("meta[name='_csrf']").attr("content");
+        var header = $("meta[name='_csrf_header']").attr("content");
+
+        var IMP = window.IMP;
+        IMP.init("imp02185841");
+        var carCost = parseFloat($("#cost").text().replace(/[^0-9]/g, ''));
+            function requestPay() {
+            IMP.init('iamport'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
+            IMP.request_pay({
+                pg: "kakaopay.{TC0ONETIME}",
+                pay_method: "card",
+                merchant_uid : 'merchant_'+new Date().getTime(),
+                name : '결제테스트',
+                amount : /*carCost*/ 100,
+                buyer_email : 'iamport@siot.do',
+                buyer_name : '구매자',
+                buyer_tel : '010-1234-5678',
+                buyer_addr : '서울특별시 강남구 삼성동',
+                buyer_postcode : '123-456'
+            }, function (rsp) { // callback
+                console.log(rsp);
+                if (rsp.success) {
+                    var msg = "예약이 완료 되었습니다";
+                    var result = {
+                        "carName": '[[${car.name}]]',
+                        "nickname": '[[${session.nickname}]]',
+                        "email" : '[[${email}]]',
+                        "carNum": '[[${car.carNum}]]',
+                        "startDate" :'[[${car.startDate}]]',
+                        "endDate" : '[[${car.endDate}]]'
+                    }
+
+                    console.log(result);
+
+                    $.ajax({
+                        url: '/reserveInfo',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify(result),
+                        beforeSend : function(xhr)
+                        {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+                            xhr.setRequestHeader(header, token);
+                        },
+                        success: function (res) {
+                            console.log(res);
+                            location.href = res;
+                        },
+                        error: function (err) {
+                            console.log(err);
+                        }
+                    });
+               }else{
+                    var msg = '결제 실패';
+                    msg += '\n에러내용 : ' + rsp.error_msg;
+                }
+                alert(msg);
+            });
+        }
+    </script>
+</th:block>
+
+</html>

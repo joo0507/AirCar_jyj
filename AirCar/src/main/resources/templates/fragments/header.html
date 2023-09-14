@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.w3.org/1999/xhtml">
+<th:block th:fragment="headerFragment">
+    <style>
+        .dateRangePicker, .chooseCount{
+            border: none;
+
+        }
+
+
+    </style>
+    <div id="root" style="height: 100%">
+        <div class="pc_wrap" style="">
+            <div class="wrap sub_wrap main_wrap">
+                <header class="header">
+                    <div class="util_wrap">
+                        <div class="gate_tab">
+                            <ul>
+                                <li class="on"><a href="/main">국내예약</a></li>
+                                <li><a href="/bookoverseas" rel="noreferrer" >해외예약</a></li>
+                            </ul>
+                        </div>
+                        <ul>
+                            <li sec:authorize="isAuthenticated()"><a href="register_car" >차량등록</a></li>
+                            </li>
+                            <li><a href="/direct" rel="noreferrer">마이페이지</a></li>
+                        </ul>
+                    </div>
+                    <div class="nav_wrap">
+                        <div class="inner">
+                            <h1><a class="brand" href="/main"></a></h1>
+                            <nav>
+                                <ul>
+                                    <li><a href="reserve">예약</a></li>
+                                    <li><a th:href="@{/reserve_confirm}">예약확인</a></li>
+                                    <li><a href="instructions">이용안내</a></li>
+                                    <li><a href="crm">고객센터</a></li>
+                                </ul>
+                            </nav>
+                            <div class="side_menu">
+
+
+
+                                <ul class="member" sec:authorize="isAnonymous()">
+                                    <li><a href="/login">로그인</a></li>
+                                    <li><a href="/login">회원가입</a></li>
+                                </ul>
+                                <ul class="member" sec:authorize="isAuthenticated()">
+                                    <li><span><a href="/mypage">[[${session.memberInfo.getNickname()}]]님</a></span></li>
+                                    <li><a class="open-layerPopup">로그아웃</a></li>
+                                    <li><a class="logout open-layerPopup"></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                <div class="layerPopup alertPopup" style="display: none">
+                    <div class="layerPopup_wrap">
+                        <div class="layerPopup_content">
+                            <div class="pop_info"><p class="txt"><span>로그아웃 하시겠어요?<br></span></p></div>
+                        </div>
+                        <div class="layerPopup_bottom">
+                            <div class="btn_group btn_prompt">
+                                <button class="btn type04 btn_close" >취소</button>
+                                <button class="btn type01" onclick="location.href='/member/logout'">로그아웃</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+</th:block>
+</html>

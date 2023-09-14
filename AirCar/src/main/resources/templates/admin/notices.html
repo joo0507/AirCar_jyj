@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout2}">
+
+<th:block layout:fragment="script">
+    <script th:inline="javascript">
+        $(document).ready(function(){
+            var searchForm = $("#searchForm");
+            $(".page-link").on("click", function(e){
+                // 페이징 이동 이벤트 막기
+                e.preventDefault();
+                var link = $(this).attr("href");
+                var searchType = $("[name=searchType]").val();
+                var keyword = $("[name=keyword]").val();
+                // 페이징 이동 링크 다시 생성(검색타입 + 검색어 포함)
+                var redirectLink = link + "&searchType=" + searchType + "&keyword=" + keyword;
+
+                // 페이지 이동
+                location.href = redirectLink;
+            });
+
+            // 검색 버튼 클릭 시 validation check
+            $("#btnSearch").on("click", function(e){
+                var searchSelectTag = $("[name=searchType]");
+                var keywordTag = $("[name=keyword]");
+
+                // 검색 항목을 선택하지 않았을 때
+                if(searchSelectTag.val().length < 1) {
+                    // 페이징 이동 이벤트 막기
+                    e.preventDefault();
+
+                    alert("검색할 항목을 선택해주세요.");
+                    searchSelectTag.select();
+                    keywordTag.val("");
+                    return false;
+                }
+
+                // 검색어를 입력하지 않았을 때
+                if(keywordTag.val().length < 1) {
+                    // 페이징 이동 이벤트 막기
+                    e.preventDefault();
+
+                    alert("검색어를 입력해주세요.");
+                    keywordTag.focus();
+                    return false;
+                }
+            });
+        });
+    </script>
+</th:block>
+<!-- header -->
+
+<!-- Page Content Start -->
+<!-- ================== -->
+<th:block layout:fragment="admin_content">
+
+
+    <!-- Page Content Start -->
+    <!-- ================== -->
+
+    <div class="wraper container-fluid">
+        <div class="page-title">
+            <h3 class="title inline">자주 찾는 질문</h3> <a class="btn btn-info m-b-5 m-l-10" href="/admin/noticesRegister"><i class="fa fa-pencil"></i> <span>질문 등록</span> </a>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+
+                        <div class="table-responsive clear_bt">
+                            <table class="table text-center">
+                                <thead>
+                                <tr>
+                                    <th>등록번호</th>
+                                    <th>카테고리</th>
+                                    <th>제목</th>
+                                    <th>내용</th>
+                                    <th>등록일</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr th:each="notices : ${noticesList}">
+                                        <td th:text="${notices.bno}"></td>
+
+                                        <td th:text="${notices.notices_category}"></td>
+
+                                        <td>
+                                            <a th:href="@{noticesView(bno=${notices.bno})}" th:text="${notices.notices_title}"></a>
+                                        </td>
+                                        <td style="width: 500px;
+                                               overflow: hidden;
+                                               text-overflow: ellipsis;
+                                               white-space: nowrap;
+                                               display: inline-block;">
+                                            <span th:text="${notices.notices_content}"></span>
+                                        </td>
+                                        <td th:text="${#temporals.format(notices.regDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <nav aria-label="Page navigation example ">
+                            <th:block th:if="${noticesList.totalElements > 0}">
+                                <ul class="pagination justify-content-center" style="display: flex; justify-content: center;"
+                                    th:with="start=${(noticesList.number/noticesList.totalPages)*noticesList.totalPages + 1},
+                    end=${(noticesList.totalPages == 0) ? 1 :
+                    (start + (noticesList.totalPages - 1) < noticesList.totalPages ? start + (noticesList.totalPages - 1) : noticesList.totalPages)}">
+
+                                    <li th:class="${noticesList.first} ? 'page-item disabled' : 'page-item'">
+                                        <a class="page-link" th:href="@{/admin/notices(page=0)}">First</a>
+                                    </li>
+                                    <li th:class="${noticesList.first} ? 'page-item disabled' : 'page-item'">
+                                        <a class="page-link" th:href="${noticesList.first} ? '#' : @{/admin/notices(page=${noticesList.number} - 1)}">Previous</a>
+                                    </li>
+                                    <li th:each="page: ${#numbers.sequence(start, end)}" th:class="${page == noticesList.number + 1} ? 'page-item active' : 'page-item' ">
+                                        <a class="page-link" th:href="@{/admin/notices(page=${page - 1})}">[[${page}]]</a>
+                                    </li>
+                                    <li th:class="${noticesList.last} ? 'page-item disabled' : 'page-item'">
+                                        <a class="page-link" th:href="${noticesList.last} ? '#' : @{/admin/notices(page=${noticesList.number} + 1)}">Next</a>
+                                    </li>
+                                    <li th:class="${noticesList.last} ? 'page-item disabled' : 'page-item'">
+                                        <a class="page-link" th:href="@{/admin/notices(page=${noticesList.totalPages - 1})}">Last</a>
+                                    </li>
+                                </ul>
+                            </th:block>
+                            <th:block th:unless="${noticesList.totalElements > 0}">
+                                <ul class="pagination justify-content-center">
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#">1</a>
+                                    </li>
+                                </ul>
+                            </th:block>
+                        </nav>
+                        <nav class="navbar bg-body-tertiary" style="display: flex; justify-content: center;">
+                            <div class="container-fluid">
+                                <form action="/admin/notices" id="searchForm" class="d-flex" role="search" style="display: flex; align-items: center;">
+                                    <select name="searchType" class="form-select" aria-label="Default select example" style="height: 30px">
+                                        <option value="" th:selected="${searchType} == ''">--</option>
+                                        <option value="title" th:selected="${searchType} == 'title'">제목</option>
+                                        <option value="content" th:selected="${searchType} == 'content'">내용</option>
+                                    </select>
+                                    <input class="form-control me-2" type="search" name="keyword" placeholder="Search" aria-label="Search" th:value="${keyword}">
+                                    <button class="btn btn-outline-success" id="btnSearch" type="submit">Search</button>
+                                </form>
+                            </div>
+                        </nav>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div> <!-- end row -->
+
+
+
+
+    </div>
+    <!-- Page Content Ends -->
+    <!-- ================== -->
+
+    </div>
+<!--    <nav class="navbar bg-body-tertiary">-->
+<!--        <div class="container-fluid justify-content-center">-->
+<!--            <form action="/board/list" id="searchForm" class="d-flex" role="search">-->
+<!--                <select name="searchType" class="form-select" aria-label="Default select example">-->
+<!--                    <option value="" th:selected="${searchType} == ''">&#45;&#45;</option>-->
+<!--                    <option value="title" th:selected="${searchType} == 'title'">제목</option>-->
+<!--                    <option value="content" th:selected="${searchType} == 'content'">내용</option>-->
+<!--                </select>-->
+<!--                <input class="form-control me-2" type="search" name="keyword" placeholder="Search" aria-label="Search" th:value="${keyword}">-->
+<!--                <button class="btn btn-outline-success" id="btnSearch" type="submit">Search</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </nav>-->
+</th:block>
+</html>

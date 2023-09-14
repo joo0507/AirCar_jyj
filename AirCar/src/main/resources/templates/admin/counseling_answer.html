@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout2}">
+
+
+<!-- header -->
+
+<!-- Page Content Start -->
+<!-- ================== -->
+<th:block layout:fragment="admin_content">
+
+
+    <!-- Page Content Start -->
+    <!-- ================== -->
+
+
+<div id="root" style="height: 100%">
+    <div class="pc_wrap" style="">
+        <div class="wrap sub_wrap">
+            <div class="container">
+                <div class="inner">
+                    <div class="contents" style="margin: auto;">
+                        <div class="title_wrap"><h2 class="title_30 search_form__row">문의 답변</h2></div>
+                        <form action="/admin/answer" method="post">
+                            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+                            <input type="hidden" name="bno" th:value="${counseling.bno}"/>
+                            <input type="hidden" name="counseling_type" th:value="${counseling.counseling_type}"/>
+                            <input type="hidden" name="counseling_stage" th:value="${counseling.counseling_stage}"/>
+                            <input type="hidden" name="counseling_email" th:value="${counseling.counseling_email}"/>
+                            <input type="hidden" name="counseling_title" th:value="${counseling.counseling_title}"/>
+                            <input type="hidden" name="counseling_content" th:value="${counseling.counseling_content}"/>
+
+                            <div class="board_detail" style="margin-bottom: 50px">
+                                <table>
+                                    <tr>
+                                        <td style="width: 60px">유형</td>
+                                        <td><pre style="width: 200px; margin-right: 130px" th:text="${counseling.counseling_type}"></pre></td>
+                                        <td style="width: 60px">단계</td>
+                                        <td><pre style="width: 200px" th:text="${counseling.counseling_stage}"></pre></td>
+                                    </tr>
+                                </table>
+                                <div class="board_contents mt20">
+                                    <span class="input-group-text" >이메일</span>
+                                    <pre style="width: 650px" th:text="${counseling.counseling_email}" id="mail"></pre>
+                                </div>
+                                <div class="board_contents mt20">
+                                    <span class="input-group-text" style="font-size: 20px">제목</span>
+                                    <pre th:text="${counseling.counseling_title}" style="width: 650px"></pre>
+                                </div>
+                                <div class="input-group mb-3"><p>
+                                    <div align="" style="">
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" >내용</span>
+                                        <pre th:text="${counseling.counseling_content}" style="width: 650px"></pre>
+                                    </div>
+                                        <p>&nbsp;</p></div>
+                                    <p>&nbsp;</p></div>
+                            </div>
+                                <div class="board_contents mt20"><p>
+                                        <div align="" style="">
+                                            <div class=" mb-3">
+                                                <span class="input-group-text" id="basic-addon2">답변</span>
+                                                <textarea class="form-control" name="answer"
+                                                          placeholder="답변" aria-label="content" aria-describedby="basic-addon2"
+                                                          style="height: 500px">[[${counseling.answer}]]</textarea>
+                                            </div>
+                                            <p>&nbsp;</p></div>
+                                        <p>&nbsp;</p></div>
+                                <div class="input-group mb-3 pagination justify-content-center" >
+                                    <button type="submit" class="btn btn-secondary" style="margin-right: 30px; width: 100px" onclick="showAlert()" >메일보내기</button>
+                                    <button type="reset" class="btn btn-light" style="margin-right: 30px; width: 100px">취소</button>
+                                    <button type="button" class="btn btn-light" style="width: 100px"
+                                            th:onclick="|location.href='@{/admin/counseling}'|">목록</button>
+                                </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <div style="position: fixed; z-index: 9999; inset: 16px 16px 100px; pointer-events: none;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/skrentalApp/bundle.29105ee17c.js"></script>
+    <script>
+        function showAlert() {
+            // 메일 보내는 로직을 추가하고, 성공 또는 실패 여부에 따라 메시지를 조절합니다.
+
+            // 성공적으로 메일을 보냈다고 가정하고 alert 창을 표시합니다.
+            alert("메일이 성공적으로 보내졌습니다!");
+        }
+    </script>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps-geocoder.js"></script>
+<script id="kakao-sdk" src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<div id="naverIdLogin" style="position: absolute; top: -10000px;"><a id="naverIdLogin_loginButton" href="#"><img
+        src="https://static.nid.naver.com/oauth/big_g.PNG?version=js-2.0.0" height="60"></a></div>
+</section>
+</body>
+
+</th:block>
+</html>
